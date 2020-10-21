@@ -335,3 +335,5 @@ declare class Iamport {
         impSecret: string
     });
 }
+
+export default Iamport;
