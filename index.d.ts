@@ -114,6 +114,17 @@ interface IamportCertification {
     origin?: string
 }
 
+interface IamportBankHolder {
+    bank_holder: string;
+}
+
+interface IamportEscrows {
+    company: string;
+    invoice: string;
+    sent_at: number;
+    applied_at: number;
+}
+
 class Payments {
     getByImpUid(params:{imp_uid: string[]}): Promise<IamportResponse<IamportPayment[]>>
 
@@ -282,6 +293,34 @@ class Vbank {
         notice_url?: string[]
         custom_data?: string
     }): Promise<IamportResponse<IamportPayment>>
+
+    getBank(params: {
+        bank_code: string,
+        bank_num: string
+    }): Promise<IamportResponse<IamportBankHolder>>
+}
+
+class Escrow {
+    postEscrow(params: {
+        imp_uid: string;
+        sender: {
+            name: string;
+            tel: string;
+            addr: string;
+            postcode: string;
+        },
+        receiver: {
+            name: string;
+            tel: string;
+            addr: string;
+            postcode: string;
+        },
+        logis: {
+            company: string;
+            invoice: string;
+            sent_at: number;
+        }
+    }): Promise<IamportResponse<IamportEscrows>>
 }
 
 class Iamport {
@@ -290,6 +329,7 @@ class Iamport {
     readonly subscribe_customer: SubscribeCustomer;
     readonly certification: Certifications;
     readonly vbank: Vbank;
+    readonly escrow: Escrow;
     constructor(options?: {
         impKey: string
         impSecret: string
