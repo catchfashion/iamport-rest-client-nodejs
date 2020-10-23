@@ -51,7 +51,7 @@ interface PayResponse {
   vbank_num: string;
 }
 
-class Iamport {
+declare class Iamport {
 
   public readonly payment: {
     getByImpUid(options: { imp_uid: string }): Promise<PayResponse>;
@@ -113,7 +113,7 @@ class Iamport {
     applied_at: number;
   }>};
 
-  constructor(options: {
+  constructor(options?: {
     impKey: string,
     impSecret: string,
   })
