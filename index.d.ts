@@ -51,6 +51,21 @@ interface PayResponse {
   vbank_num: string;
 }
 
+interface CancelResponse {
+  cancel_amount: number;
+  cancelled_at: number;
+  cancel_reason: string;
+  // cancel_history: {
+  //   pg_tid: string;
+  //   amount: number;
+  //   cancelled_at: number;
+  //   reason: string;
+  //   receipt_url: string;
+  // }[];
+  cancel_receipt_urls: string[];
+  // cash_receipt_issued: boolean;
+}
+
 declare class Iamport {
 
   public readonly payment: {
@@ -65,26 +80,16 @@ declare class Iamport {
       refund_holder?: string;
       refund_bank?: string;
       refund_account?: string;
-    }): Promise<PayResponse & {
-      cancel_amount: number;
-      cancelled_at: number;
-      cancel_reason: string;
-      // cancel_history: {
-      //   pg_tid: string;
-      //   amount: number;
-      //   cancelled_at: number;
-      //   reason: string;
-      //   receipt_url: string;
-      // }[];
-      cancel_receipt_urls: string[];
-      // cash_receipt_issued: boolean;
-    }>;
+    }): Promise<PayResponse & CancelResponse>;
   };
   public readonly vbank: {
     getBank(params: {
       bank_code: string,
       bank_num: string
-    }): Promise<{ bank_holder: string; }>
+    }): Promise<{ bank_holder: string; }>;
+    deleteVbank(params: {
+      imp_uid: string
+    }): Promise<PayResponse & CancelResponse>;
   };
   public readonly escrow: {
     postEscrow(params: {
