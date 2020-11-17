@@ -118,6 +118,19 @@ declare class Iamport {
     applied_at: number;
   }>};
 
+  public readonly subscribe: {
+    onetime(params: {
+      merchant_uid: string;
+      amount: number;
+      card_number: string;
+      expiry: string;
+      birth: string;
+      pg: string;
+      pwd_2digit?: string;
+      voucher?: number;
+    }): Promise<PayResponse>;
+  }
+
   constructor(options?: {
     impKey: string,
     impSecret: string,
