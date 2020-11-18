@@ -128,6 +128,15 @@ declare class Iamport {
       pg: string;
       pwd_2digit?: string;
       voucher?: number;
+      name?: string;
+      buyer_name?: string;
+      buyer_email?: string;
+      buyer_tel?: string;
+      buyer_addr?: string;
+      buyer_postcode?: string;
+      custom_data?: string;
+      tax_free?: number;
+      customer_uid?: string;
     }): Promise<PayResponse>;
   }
 
