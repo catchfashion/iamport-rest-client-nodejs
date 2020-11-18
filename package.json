@@ -1,6 +1,6 @@
 {
   "name": "@catchfashion/iamport",
-  "version": "0.3.77",
+  "version": "0.3.78",
   "description": "REST API client for I'amport;",
   "main": "index.js",
   "scripts": {
